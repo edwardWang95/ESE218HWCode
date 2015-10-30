@@ -13,10 +13,10 @@ public class HW8 {
     private static int i_q0;
     private static int i_q1;
 
-    public static void main(String [] args){
-        String s_continueValue;
-        Scanner input = new Scanner(System.in);
+    private static final int i_Init = 1;
 
+    public static void main(String [] args){
+        Scanner input = new Scanner(System.in);
         while(true) {
              /*
              System.out.print("Do you wish to enter values [y/n]: ");
@@ -32,12 +32,18 @@ public class HW8 {
             System.out.print("Enter Value for Q0: ");
             i_q0 = input.nextInt();
 
-            System.out.println("Value for D1-D0-Z: "+returnD1(i_x, i_q0, i_q1)+returnD0(i_x, i_q0, i_q1)+returnZ(d1, d0, i_x));
+            //question 1
+            //System.out.println("Value for D1-D0-Z: "+returnD1(i_x, i_q0, i_q1)+returnD0(i_x, i_q0, i_q1)+returnZ(d1, d0, i_x));
+
+            //question 2
+            System.out.println("Value for D1-D0-Z: "+returnD1(i_x, i_q0, i_q1)+returnD0(i_x, i_q0, i_q1)+returnZ(i_q1, i_q0, i_x));
 
             reset();
         }
     }
 
+    //Question 1
+    /*
     private static int returnD1(int x, int q0, int q1){
         d1 = (q0 * x) + (q1 * getComplement(x));
         return d1;
@@ -50,6 +56,24 @@ public class HW8 {
 
     private static int returnZ(int d1, int d0, int x){
         i_z = (d1 * d0 * x);
+        return i_z;
+    }
+    */
+    //Question 2
+    private static int returnD1(int x, int q0, int q1){
+        d1 = (q0 * x * getComplement(q1)) + (q1 * getComplement(q0) * getComplement(x)) +
+                (q1 * x);
+        return d1;
+    }
+
+
+    private static int returnD0(int x, int q0, int q1){
+        d0 =(q1 * q0 * q0) + (getComplement(q1) * q0 * q0);
+        return d0;
+    }
+
+    private static int returnZ(int q1, int q0, int x){
+        i_z = q1 * q0 * i_Init;
         return i_z;
     }
 
